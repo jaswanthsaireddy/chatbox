@@ -1,34 +1,30 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { loadPastConversation } from "../redux/chatSlice"; // ✅ Import existing action
 
-const Sidebar = ({ onConversationClick }) => {
+const Sidebar = () => {
   const pastConversations = useSelector((state) => state.chat.pastConversations);
+  const selectedConversation = useSelector((state) => state.chat.selectedConversation);
+  const dispatch = useDispatch();
 
   return (
     <div className="w-1/4 bg-gray-800 p-4 text-white overflow-y-auto">
-      <h2 className="text-lg font-semibold mb-3">Past Conversations</h2>
-      {pastConversations.length === 0 ? (
-        <p className="text-gray-400">No past conversations yet.</p>
-      ) : (
-        pastConversations.map((session, idx) => (
-          <div
-            key={idx}
-            className="mb-3 p-2 bg-gray-700 rounded cursor-pointer"
-            onClick={() => onConversationClick(session)}
-          >
-            <p className="text-sm text-gray-300">Chat {idx + 1}</p>
-            <div className="text-xs text-gray-400 max-h-20 overflow-hidden">
-              {session.messages.map((chat, index) => (
-                <p  className=" text-md font-bold" key={index}>
-                  <span className="  text-blue-300">U:</span> {chat.userMessage}
-                </p>
-              ))}
-            </div>
-            {/* {session.feedback && (
-              <p className="text-yellow-400 text-xs mt-1">⭐ {session.feedback.rating}</p>
-            )} */}
-          </div>
-        ))
-      )}
+      <h2 className="text-lg font-bold mb-4">Past Conversations</h2>
+      <div className="space-y-2">
+        {pastConversations.length === 0 ? (
+          <p className="text-gray-400">No past conversations</p>
+        ) : (
+          pastConversations.map((conversation, index) => (
+            <button 
+              key={index} 
+              className={`w-full p-2 rounded 
+                ${selectedConversation === conversation ? "bg-blue-500" : "bg-gray-700 hover:bg-gray-600"}`} // ✅ Highlight selected button
+              onClick={() => dispatch(loadPastConversation(conversation))} // ✅ Use loadPastConversation
+            >
+              Conversation {index + 1}
+            </button>
+          ))
+        )}
+      </div>
     </div>
   );
 };

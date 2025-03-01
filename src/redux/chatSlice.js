@@ -7,6 +7,7 @@ const chatSlice = createSlice({
     pastConversations: [],
     showFeedbackForm: false,
     finalFeedback: null, // Store final feedback separately
+    selectedConversation: null,
   },
   reducers: {
     setAIResponse: (state, action) => {
@@ -20,6 +21,7 @@ const chatSlice = createSlice({
     },
     toggleFeedbackForm: (state, action) => {
       state.showFeedbackForm = action.payload;
+
     },
     setFinalFeedback: (state, action) => {
       state.finalFeedback = action.payload;
@@ -36,6 +38,10 @@ const chatSlice = createSlice({
     },
     clearConversation: (state) => {
       state.conversations = [];
+      state.selectedConversation = null;
+    },
+    loadPastConversation: (state, action) => {
+      state.selectedConversation = action.payload; // Load selected past conversation
     },
   },
 });
@@ -47,5 +53,6 @@ export const {
   setFinalFeedback,
   storeConversation,
   clearConversation,
+  loadPastConversation
 } = chatSlice.actions;
 export default chatSlice.reducer;
