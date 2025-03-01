@@ -8,25 +8,25 @@ const Chat = () => {
   const dispatch = useDispatch();
   const conversations = useSelector((state) => state.chat.conversations);
 
+
+
   const handleSend = async () => {
     if (message.trim() !== "") {
-      const userMessage = message;
-      setMessage(""); // Clear input immediately
+        const userMessage = message;
+        setMessage(""); // Clear input immediately
 
-      try {
-        // Mock API call to AI backend
-        const response = await axios.post("http://localhost:5000/api/chat", {
-          message: userMessage,
-        });
+        try {
+            const response = await axios.post("http://localhost:5000/api/chat", { message: userMessage });
 
-        // Dispatch new chat message to Redux store
-        dispatch(setAIResponse({ userMessage, aiMessage: response.data.message }));
-      } catch (error) {
-        console.error("Error fetching AI response:", error);
-        dispatch(setAIResponse({ userMessage, aiMessage: "Error fetching response." }));
-      }
+            // Dispatch new chat message to Redux store
+            dispatch(setAIResponse({ userMessage, aiMessage: response.data.message }));
+        } catch (error) {
+            console.error("Error fetching AI response:", error);
+            dispatch(setAIResponse({ userMessage, aiMessage: "Error fetching response." }));
+        }
     }
-  };
+};
+
 
   return (
     <div className="max-w-lg mx-auto p-4 bg-gray-800 text-white rounded-lg shadow-lg">
