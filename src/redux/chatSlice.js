@@ -7,10 +7,18 @@ const chatSlice = createSlice({
   },
   reducers: {
     setAIResponse: (state, action) => {
-      state.conversations.push(action.payload);
+      state.conversations.push(action.payload
+      );
     },
-  },
+    setFeedback: (state, action) => {
+      const { index, feedback } = action.payload;
+      if(state.conversations[index]){
+        state.conversations[index].feedback = feedback; // Store feedback
+      }
+      
+    },
+},
 });
 
-export const { setAIResponse } = chatSlice.actions;
+export const { setAIResponse,setFeedback } = chatSlice.actions;
 export default chatSlice.reducer;
