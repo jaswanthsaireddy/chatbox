@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { setFinalFeedback, toggleFeedbackForm, clearConversation } from "../redux/chatSlice";
+import { setFinalFeedback, toggleFeedbackForm, storeConversation } from "../redux/chatSlice";
 import { useState } from "react";
 
 const FeedbackForm = () => {
@@ -11,8 +11,8 @@ const FeedbackForm = () => {
   const handleSubmit = () => {
     if (rating > 0) {
       dispatch(setFinalFeedback({ rating, comment }));
+      dispatch(storeConversation()); // Store chat history before clearing
       dispatch(toggleFeedbackForm(false));
-      dispatch(clearConversation());
     }
   };
 
@@ -37,7 +37,7 @@ const FeedbackForm = () => {
           ))}
         </div>
 
-        {/*  Feedback Text */}
+        {/* Feedback Text */}
         <textarea
           className="w-full p-2 bg-gray-600 rounded mt-2"
           placeholder="Write your feedback..."
@@ -45,7 +45,7 @@ const FeedbackForm = () => {
           onChange={(e) => setComment(e.target.value)}
         />
 
-        {/*  Submit Button */}
+        {/* Submit Button */}
         <button
           className={`mt-3 px-4 py-2 rounded 
             ${rating > 0 ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-500 cursor-not-allowed"}`}

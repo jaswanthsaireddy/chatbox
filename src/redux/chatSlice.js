@@ -4,7 +4,9 @@ const chatSlice = createSlice({
   name: "chat",
   initialState: {
     conversations: [],
+    pastConversations: [],
     showFeedbackForm: false,
+    finalFeedback: null, // Store final feedback separately
   },
   reducers: {
     setAIResponse: (state, action) => {
@@ -20,8 +22,17 @@ const chatSlice = createSlice({
       state.showFeedbackForm = action.payload;
     },
     setFinalFeedback: (state, action) => {
-        state.finalFeedback = action.payload;
-      console.log("Final Feedback:", action.payload);
+      state.finalFeedback = action.payload;
+    },
+    storeConversation: (state) => {
+      if (state.conversations.length > 0) {
+        state.pastConversations.push({
+          messages: [...state.conversations], // Store all messages
+          feedback: state.finalFeedback || {}, // Store final feedback
+        });
+        state.conversations = []; // Clear ongoing chat
+        state.finalFeedback = null; // Reset feedback for next chat
+      }
     },
     clearConversation: (state) => {
       state.conversations = [];
@@ -29,5 +40,12 @@ const chatSlice = createSlice({
   },
 });
 
-export const { setAIResponse, setFeedback, toggleFeedbackForm, setFinalFeedback, clearConversation } = chatSlice.actions;
+export const {
+  setAIResponse,
+  setFeedback,
+  toggleFeedbackForm,
+  setFinalFeedback,
+  storeConversation,
+  clearConversation,
+} = chatSlice.actions;
 export default chatSlice.reducer;
