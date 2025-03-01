@@ -1,23 +1,24 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAIResponse, setFeedback } from "../redux/chatSlice"; // Import feedback action
-import axios from "axios"; // Import Axios
+import { setAIResponse, setFeedback, toggleFeedbackForm } from "../redux/chatSlice";
+import axios from "axios";
+import FeedbackForm from "./FeedbackForm"; // Import Feedback Form
 
 const Chat = () => {
-  const [message, setMessage] = useState(""); // Input state
+  const [message, setMessage] = useState("");
   const dispatch = useDispatch();
   const conversations = useSelector((state) => state.chat.conversations);
-  const [hoverIndex, setHoverIndex] = useState(null); // Track which AI response is hovered
+  const showFeedbackForm = useSelector((state) => state.chat.showFeedbackForm);
+  const [hoverIndex, setHoverIndex] = useState(null);
 
   const handleSend = async () => {
     if (message.trim() !== "") {
       const userMessage = message;
-      setMessage(""); // Clear input immediately
+      setMessage("");
 
       try {
         const response = await axios.post("http://localhost:5000/api/chat", { message: userMessage });
 
-        // Dispatch new chat message to Redux store
         dispatch(setAIResponse({ userMessage, aiMessage: response.data.message, feedback: null }));
       } catch (error) {
         console.error("Error fetching AI response:", error);
@@ -32,11 +33,10 @@ const Chat = () => {
 
   return (
     <div className="max-w-lg mx-auto p-4 bg-gray-800 text-white rounded-lg shadow-lg">
-      {/* Chat Box */}
       <div className="h-96 overflow-y-auto p-2 bg-gray-900 rounded-md">
         {conversations.map((chat, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className="mb-4 relative"
             onMouseEnter={() => setHoverIndex(index)}
             onMouseLeave={() => setHoverIndex(null)}
@@ -44,25 +44,15 @@ const Chat = () => {
             <p className="text-blue-400">User: {chat.userMessage}</p>
             <p className="text-green-400">AI: {chat.aiMessage}</p>
 
-            {/* Feedback buttons (appear on hover) */}
+            {/* Thumbs-up/down on hover */}
             {hoverIndex === index && (
               <div className="absolute right-0 top-0 flex space-x-2 bg-gray-800 p-1 rounded">
-                <button 
-                  onClick={() => handleFeedback(index, "thumbs-up")}
-                  className="text-green-400 hover:text-green-500"
-                >
-                  👍
-                </button>
-                <button 
-                  onClick={() => handleFeedback(index, "thumbs-down")}
-                  className="text-red-400 hover:text-red-500"
-                >
-                  👎
-                </button>
+                <button onClick={() => handleFeedback(index, "thumbs-up")} >👍</button>
+                <button onClick={() => handleFeedback(index, "thumbs-down")} >👎</button>
               </div>
             )}
 
-            {/* Show feedback status */}
+            {/* Show feedback */}
             {chat.feedback && (
               <p className="text-sm text-gray-400">
                 Feedback: {chat.feedback === "thumbs-up" ? "👍 Liked" : "👎 Disliked"}
@@ -72,7 +62,7 @@ const Chat = () => {
         ))}
       </div>
 
-      {/* Input Field */}
+      {/* Input + Send Button */}
       <div className="flex mt-4">
         <input
           type="text"
@@ -81,13 +71,21 @@ const Chat = () => {
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Type a message..."
         />
-        <button
-          onClick={handleSend}
-          className="bg-blue-500 px-4 py-2 rounded-r-md hover:bg-blue-600"
-        >
-          Send
-        </button>
+        <button onClick={handleSend} className="bg-blue-500 px-4 py-2 rounded-r-md hover:bg-blue-600">Send</button>
       </div>
+
+      {/* End Conversation Button */}
+      {conversations.length > 0 && (
+        <button
+          className="mt-4 w-full p-2 bg-red-500 text-white rounded hover:bg-red-600"
+          onClick={() => dispatch(toggleFeedbackForm(true))}
+        >
+          End Conversation
+        </button>
+      )}
+
+      {/* Feedback Form (Popup) */}
+      {showFeedbackForm && <FeedbackForm />}
     </div>
   );
 };
