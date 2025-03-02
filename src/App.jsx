@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import Chat from "./components/Chat";
 import { storeConversation } from "./redux/chatSlice"; 
-import Sidebar from "./components/SideBar";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   const pastConversations = useSelector((state) => state.chat.pastConversations);
