@@ -19,7 +19,7 @@ I chose React with Vite for its fast development experience and optimized build 
 Component based structure
 ```
 APP
-    Sidebar
+    SideBar
     Chat
         FeedbackForm
 ```
@@ -31,7 +31,7 @@ I have taken a single page in which sidebar and chat will render in app and , we
 
 yet to be done features are 
 
-Shareable link and Feedback overview page are pending .
+toggle between light and dark theme
 
 
 ## Getting Started

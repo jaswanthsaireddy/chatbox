@@ -1,9 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import Chat from "./components/Chat";
-import { storeConversation } from "./redux/chatSlice"; 
-import Sidebar from "./components/SideBar";
-import ChatFeedback from "./components/chatFeedback";
-import Chatpage from "./pages/Chatpage";
+
+import ChatPage from "./pages/ChatPage";
 import FeedbackOverview from "./pages/FeedbackOverviewPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -12,7 +8,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/feedback-overview" element={<FeedbackOverview />} />
-        <Route path="/" element={<Chatpage />} />
+        <Route path="/" element={<ChatPage />} />
       </Routes>
     </Router>
   );

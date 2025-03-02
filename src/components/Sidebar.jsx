@@ -3,7 +3,7 @@ import { useState } from "react";
 import { loadPastConversation } from "../redux/chatSlice"; 
 import { useNavigate } from "react-router-dom";
 
-const Sidebar = () => {
+const SideBar = () => {
   const pastConversations = useSelector((state) => state.chat.pastConversations);
   const selectedConversation = useSelector((state) => state.chat.selectedConversation);
   const dispatch = useDispatch();
@@ -68,7 +68,7 @@ const Sidebar = () => {
             ))
           )}
         </div>
-        <div className="absolute bottom-0 w-full p-4 bg-gray-800">
+        <div className="absolute bottom-0 w-max p-4 bg-gray-800">
           <button 
             className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
             onClick={() => navigate('/feedback-overview')}
@@ -81,4 +81,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default SideBar;
