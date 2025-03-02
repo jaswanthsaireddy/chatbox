@@ -41,7 +41,8 @@ const chatSlice = createSlice({
       state.selectedConversation = null;
     },
     loadPastConversation: (state, action) => {
-      state.selectedConversation = action.payload; // Load selected past conversation
+      state.conversations = [...action.payload.messages]; // Load messages
+      state.selectedConversation = action.payload; // Store full conversation
     },
       },
 });

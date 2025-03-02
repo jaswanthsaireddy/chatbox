@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAIResponse, setFeedback, toggleFeedbackForm, storeConversation, loadPastConversation, clearConversation } from "../redux/chatSlice";
 import axios from "axios";
 import FeedbackForm from "./FeedbackForm";
-import Sidebar from "./SideBar"; // Import Sidebar Component
+
 
 const Chat = () => {
   const [message, setMessage] = useState("");
@@ -13,16 +13,24 @@ const Chat = () => {
   const showFeedbackForm = useSelector((state) => state.chat.showFeedbackForm);
   const [hoverIndex, setHoverIndex] = useState(null);
 
+
   const displayedConversation = Array.isArray(selectedConversation) ? selectedConversation : conversations;
+  const isPastConversation = selectedConversation !== null;
+
+
+const handleNewConversation = () => {
+  dispatch(clearConversation()); // Reset chat when starting a new conversation
+};
+
 
   const handleSend = async () => {
     if (message.trim() !== "") {
       const userMessage = message;
       setMessage("");
-
+  
       try {
         const response = await axios.post("http://localhost:5000/api/chat", { message: userMessage });
-
+  
         dispatch(setAIResponse({ userMessage, aiMessage: response.data.message, feedback: null }));
       } catch (error) {
         console.error("Error fetching AI response:", error);
@@ -30,6 +38,7 @@ const Chat = () => {
       }
     }
   };
+  
 
   const handleFeedback = (index, feedbackType) => {
     dispatch(setFeedback({ index, feedback: feedbackType }));
@@ -85,15 +94,24 @@ const Chat = () => {
             </button>
           </div>
 
-          {/* End Conversation Button */}
-          {conversations.length > 0 && (
+          {isPastConversation ? (
             <button
-              className="mt-4 w-full p-2 bg-red-500 text-white rounded hover:bg-red-600"
-              onClick={handleEndConversation}
+              className="mt-4 w-full p-2 bg-green-500 text-white rounded hover:bg-gray-600"
+              onClick={handleNewConversation} // Resets chat and goes back to a new chat
             >
-              End Conversation
+              New Conversation
             </button>
+          ) : (
+            conversations.length > 0 && (
+              <button
+                className="mt-4 w-full p-2 bg-red-500 text-white rounded hover:bg-red-600"
+                onClick={handleEndConversation} // Ends current chat and shows feedback form
+              >
+                End Conversation
+              </button>
+            )
           )}
+
 
           {/* Feedback Form (Popup) */}
           {showFeedbackForm && <FeedbackForm />}

@@ -8,6 +8,8 @@ const FeedbackForm = () => {
   const [hoverRating, setHoverRating] = useState(0);
   const [comment, setComment] = useState("");
 
+  
+ 
   const handleSubmit = () => {
     if (rating > 0) {
       dispatch(setFinalFeedback({ rating, comment }));
