@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { loadPastConversation } from "../redux/chatSlice"; // ✅ Import existing action
-
+import { loadPastConversation } from "../redux/chatSlice"; 
 const Sidebar = () => {
   const pastConversations = useSelector((state) => state.chat.pastConversations);
   const selectedConversation = useSelector((state) => state.chat.selectedConversation);
@@ -17,8 +16,8 @@ const Sidebar = () => {
             <button 
               key={index} 
               className={`w-full p-2 rounded 
-                ${selectedConversation === conversation ? "bg-blue-500" : "bg-gray-700 hover:bg-gray-600"}`} // ✅ Highlight selected button
-              onClick={() => dispatch(loadPastConversation(conversation))} // ✅ Use loadPastConversation
+                ${selectedConversation === conversation ? "bg-blue-500" : "bg-gray-700 hover:bg-gray-600"}`} 
+              onClick={() => dispatch(loadPastConversation(conversation))} 
             >
               Conversation {index + 1}
             </button>

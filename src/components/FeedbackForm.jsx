@@ -13,7 +13,7 @@ const FeedbackForm = () => {
   const handleSubmit = () => {
     if (rating > 0) {
       dispatch(setFinalFeedback({ rating, comment }));
-      dispatch(storeConversation()); // Store chat history before clearing
+      dispatch(storeConversation()); 
       dispatch(toggleFeedbackForm(false));
     }
   };

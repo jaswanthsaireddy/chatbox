@@ -6,7 +6,7 @@ const chatSlice = createSlice({
     conversations: [],
     pastConversations: [],
     showFeedbackForm: false,
-    finalFeedback: null, // Store final feedback separately
+    finalFeedback: null, 
     selectedConversation: null,
   },
   reducers: {
@@ -29,11 +29,11 @@ const chatSlice = createSlice({
     storeConversation: (state) => {
       if (state.conversations.length > 0) {
         state.pastConversations.push({
-          messages: [...state.conversations], // Store all messages
-          feedback: state.finalFeedback || {}, // Store final feedback
+          messages: [...state.conversations], 
+          feedback: state.finalFeedback || {}, 
         });
-        state.conversations = []; // Clear ongoing chat
-        state.finalFeedback = null; // Reset feedback for next chat
+        state.conversations = []; 
+        state.finalFeedback = null; 
       }
     },
     clearConversation: (state) => {
@@ -41,8 +41,8 @@ const chatSlice = createSlice({
       state.selectedConversation = null;
     },
     loadPastConversation: (state, action) => {
-      state.conversations = [...action.payload.messages]; // Load messages
-      state.selectedConversation = action.payload; // Store full conversation
+      state.conversations = [...action.payload.messages]; 
+      state.selectedConversation = action.payload;
     },
       },
 });

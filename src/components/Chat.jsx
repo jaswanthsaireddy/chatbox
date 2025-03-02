@@ -45,13 +45,14 @@ const handleNewConversation = () => {
   };
 
   const handleEndConversation = () => {
-    dispatch(toggleFeedbackForm(true)); // Show feedback form
+    dispatch(toggleFeedbackForm(true)); 
   };
 
   return (
     <div className="flex h-screen w-full bg-gray-900">
       {/* Chatbox */}
       <div className="flex-1 flex flex-col items-center p-4">
+      <h1 className="text-2xl font-bold text-white mb-4">AI Chat Assistant</h1>
         <div className="w-full bg-gray-800 text-white rounded-lg shadow-lg p-4">
           <div className="h-[30rem] overflow-y-auto p-2 bg-gray-900 rounded-md">
             {displayedConversation.map((chat, index) => (
@@ -82,13 +83,19 @@ const handleNewConversation = () => {
 
           {/* Input + Send Button */}
           <div className="flex mt-4">
-            <input
-              type="text"
-              className="flex-1 p-2 bg-gray-700 text-white rounded-l-md"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Type a message..."
-            />
+          <input
+                type="text"
+                className="flex-1 p-2 bg-gray-700 text-white rounded-l-md"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault(); 
+                    handleSend();
+                  }
+                }}
+                placeholder="Type a message..."
+              />
             <button onClick={handleSend} className="bg-blue-500 px-4 py-2 rounded-r-md hover:bg-blue-600">
               Send
             </button>
@@ -97,7 +104,7 @@ const handleNewConversation = () => {
           {isPastConversation ? (
             <button
               className="mt-4 w-full p-2 bg-green-500 text-white rounded hover:bg-gray-600"
-              onClick={handleNewConversation} // Resets chat and goes back to a new chat
+              onClick={handleNewConversation} 
             >
               New Conversation
             </button>
@@ -105,7 +112,7 @@ const handleNewConversation = () => {
             conversations.length > 0 && (
               <button
                 className="mt-4 w-full p-2 bg-red-500 text-white rounded hover:bg-red-600"
-                onClick={handleEndConversation} // Ends current chat and shows feedback form
+                onClick={handleEndConversation} 
               >
                 End Conversation
               </button>

@@ -7,13 +7,14 @@ function App() {
   const pastConversations = useSelector((state) => state.chat.pastConversations);
   const dispatch = useDispatch();
 
-  // Function to load past conversation
-  const handleLoadConversation = (conversationIndex) => {
+
+  const handleLoadConversation = () => {
     dispatch(storeConversation()); 
   };
 
   return (
     <div className="flex h-screen bg-gray-900">
+       
       <Sidebar pastConversations={pastConversations} onLoadConversation={handleLoadConversation} />
       <Chat />
     </div>
