@@ -19,7 +19,7 @@ I chose React with Vite for its fast development experience and optimized build 
 Component based structure
 ```
 APP
-    SideBar
+    Sidebar
     Chat
         FeedbackForm
 ```

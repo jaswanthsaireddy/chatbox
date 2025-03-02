@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import Chat from "../components/Chat";
 import { storeConversation } from "../redux/chatSlice"; 
-import SideBar from "../components/SideBar";
+import Sidebar from "../components/Sidebar";
 import ChatFeedback from "../components/chatFeedback";
 
 function Chatpage() {
@@ -14,7 +14,7 @@ function Chatpage() {
 
   return (
     <div className="flex h-screen bg-gray-900">
-      <SideBar pastConversations={pastConversations} onLoadConversation={handleLoadConversation} />
+      <Sidebar pastConversations={pastConversations} onLoadConversation={handleLoadConversation} />
       <Chat />
       <ChatFeedback />
     </div>

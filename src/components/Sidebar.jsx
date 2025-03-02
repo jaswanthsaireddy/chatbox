@@ -3,7 +3,7 @@ import { useState } from "react";
 import { loadPastConversation } from "../redux/chatSlice"; 
 import { useNavigate } from "react-router-dom";
 
-const SideBar = () => {
+const Sidebar = () => {
   const pastConversations = useSelector((state) => state.chat.pastConversations);
   const selectedConversation = useSelector((state) => state.chat.selectedConversation);
   const dispatch = useDispatch();
@@ -81,4 +81,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default Sidebar;
