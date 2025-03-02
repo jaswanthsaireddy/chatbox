@@ -8,8 +8,9 @@ function App() {
   const dispatch = useDispatch();
 
   // Function to load past conversation
+
   const handleLoadConversation = (conversationIndex) => {
-    dispatch(storeConversation()); 
+    dispatch(loadPastConversation(pastConversations[conversationIndex])); 
   };
 
   return (

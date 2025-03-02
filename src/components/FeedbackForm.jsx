@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import { setFinalFeedback, toggleFeedbackForm, storeConversation } from "../redux/chatSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setFinalFeedback, toggleFeedbackForm, storeConversation,saveConversationToBackend } from "../redux/chatSlice";
 import { useState } from "react";
 
 const FeedbackForm = () => {
@@ -7,11 +7,17 @@ const FeedbackForm = () => {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [comment, setComment] = useState("");
+  const feedBackData = useSelector((state) => state.chat.finalFeedback);
+  const conversations = useSelector((state) => state.chat.conversations);
+
+
 
   const handleSubmit = () => {
     if (rating > 0) {
       dispatch(setFinalFeedback({ rating, comment }));
-      dispatch(storeConversation()); // Store chat history before clearing
+      dispatch(saveConversationToBackend({ messages: conversations, feedback: feedBackData }));
+      console.log(feedBackData);
+      // dispatch(storeConversation()); // Store chat history before clearing
       dispatch(toggleFeedbackForm(false));
     }
   };
