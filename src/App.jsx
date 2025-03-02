@@ -1,5 +1,5 @@
 
-import ChatPage from "./pages/ChatPage";
+import Chatpage from "./pages/Chatpage";
 import FeedbackOverview from "./pages/FeedbackOverviewPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/feedback-overview" element={<FeedbackOverview />} />
-        <Route path="/" element={<ChatPage />} />
+        <Route path="/" element={<Chatpage />} />
       </Routes>
     </Router>
   );

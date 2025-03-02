@@ -4,7 +4,7 @@ import { storeConversation } from "../redux/chatSlice";
 import SideBar from "../components/SideBar";
 import ChatFeedback from "../components/chatFeedback";
 
-function ChatPage() {
+function Chatpage() {
   const pastConversations = useSelector((state) => state.chat.pastConversations);
   const dispatch = useDispatch();
 
@@ -21,4 +21,4 @@ function ChatPage() {
   );
 }
 
-export default ChatPage;
+export default Chatpage;
