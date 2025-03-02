@@ -36,7 +36,6 @@ const Chat = () => {
   };
 
   const handleEndConversation = () => {
-    dispatch(storeConversation()); // Store past conversation
     dispatch(toggleFeedbackForm(true)); // Show feedback form
   };
 

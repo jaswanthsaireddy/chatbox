@@ -43,7 +43,7 @@ const chatSlice = createSlice({
     loadPastConversation: (state, action) => {
       state.selectedConversation = action.payload; // Load selected past conversation
     },
-  },
+      },
 });
 
 export const {
