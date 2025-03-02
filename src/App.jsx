@@ -1,7 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import Chat from "./components/Chat";
 import { storeConversation } from "./redux/chatSlice"; 
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/SideBar";
+import ChatFeedback from "./components/chatFeedback";
 
 function App() {
   const pastConversations = useSelector((state) => state.chat.pastConversations);
@@ -17,6 +18,7 @@ function App() {
        
       <Sidebar pastConversations={pastConversations} onLoadConversation={handleLoadConversation} />
       <Chat />
+      <ChatFeedback  />
     </div>
   );
 }
