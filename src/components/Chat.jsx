@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAIResponse, setFeedback, toggleFeedbackForm, storeConversation, loadPastConversation, clearConversation } from "../redux/chatSlice";
+import { setAIResponse, setFeedback, toggleFeedbackForm,clearConversation } from "../redux/chatSlice";
 import FeedbackForm from "./FeedbackForm";
 
 
@@ -81,7 +81,7 @@ const getRandomMessage = () => {
       <div className="flex-1 flex flex-col items-center p-4">
       <h1 className="text-2xl font-bold text-white mb-4">AI Chat Assistant</h1>
         <div className="w-full bg-gray-800 text-white rounded-lg shadow-lg p-4">
-          <div className="h-[30rem] overflow-y-auto p-2 bg-gray-900 rounded-md">
+          <div className="h-[28rem] overflow-y-auto p-2 bg-gray-900 rounded-md">
             {displayedConversation.map((chat, index) => (
               <div
                 key={index}
@@ -92,11 +92,26 @@ const getRandomMessage = () => {
                 <p className="text-blue-400 text-right">User:<br/> {chat.userMessage}</p>
                 <p className="text-green-400">AI:<br/> {chat.aiMessage}</p>
                 
+                
+
                 {hoverIndex === index && (
                   <div className="absolute flex space-x-2 bg-gray-800 p-1 rounded">
-                    <button onClick={() => handleFeedback(index, "thumbs-up")}>👍</button>
-                    <button onClick={() => handleFeedback(index, "thumbs-down")}>👎</button>
+                    <button 
+                      onClick={() => !isPastConversation && handleFeedback(index, "thumbs-up")}
+                      disabled={isPastConversation}
+                      className={isPastConversation ? "opacity-50 cursor-not-allowed" : ""}
+                    >
+                      👍
+                    </button>
+                    <button 
+                      onClick={() => !isPastConversation && handleFeedback(index, "thumbs-down")}
+                      disabled={isPastConversation}
+                      className={isPastConversation ? "opacity-50 cursor-not-allowed" : ""}
+                    >
+                      👎
+                    </button>
                   </div>
+
                 )}
 
                 {chat.feedback && (
@@ -116,14 +131,20 @@ const getRandomMessage = () => {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") {
+                  if (e.key === "Enter" && !isPastConversation) {
                     e.preventDefault(); 
                     handleSend();
                   }
                 }}
-                placeholder="Type a message..."
+                placeholder={isPastConversation ? "Viewing past conversation , Click on new conversation" : "Type a message..."}
+                disabled={isPastConversation}
               />
-            <button onClick={handleSend} className="bg-blue-500 px-4 py-2 rounded-r-md hover:bg-blue-600">
+            <button 
+                onClick={handleSend}
+                className="bg-blue-500 px-4 py-2 rounded-r-md hover:bg-blue-600"
+                disabled={isPastConversation}
+                
+                >               
               Send
             </button>
           </div>

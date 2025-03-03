@@ -5,7 +5,6 @@ import Sidebar from "../components/Sidebar";
 import ChatFeedback from "../components/ChatFeedback";
 
 function Chatpage() {
-  // const pastConversations = useSelector((state) => state.chat.pastConversations);
   return (
     <div className="flex h-screen bg-gray-900">
       <Sidebar/>
