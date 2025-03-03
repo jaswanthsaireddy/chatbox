@@ -1,15 +1,22 @@
 import { useSelector, useDispatch } from "react-redux";
 import Chat from "../components/Chat";
-import { storeConversation } from "../redux/chatSlice"; 
+import { storeConversation, toggleDarkMode } from "../redux/chatSlice"; 
 import Sidebar from "../components/Sidebar";
 import ChatFeedback from "../components/ChatFeedback";
 
 function Chatpage() {
+  const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.chat.darkMode); // Get dark mode state from Redux
+
+  const handleToggleDarkMode = () => {
+    dispatch(toggleDarkMode());
+  };
+
   return (
-    <div className="flex h-screen bg-gray-900">
-      <Sidebar/>
-      <Chat />
-      <ChatFeedback />
+    <div className={`flex h-screen ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+      <Sidebar darkMode={darkMode} onToggleDarkMode={handleToggleDarkMode} />
+      <Chat darkMode={darkMode} />
+      <ChatFeedback darkMode={darkMode} />
     </div>
   );
 }

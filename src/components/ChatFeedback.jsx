@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 const ChatFeedback = () => {
     const selectedConversation = useSelector((state) => state.chat.selectedConversation);
+    const darkMode = useSelector((state) => state.chat.darkMode);
 
     // Ensure feedback exists to avoid errors
     const feedback = selectedConversation?.feedback || { rating: 0, comment: "No feedback provided." };
@@ -14,7 +15,7 @@ const ChatFeedback = () => {
     if (!selectedConversation) return null;  
 
     return (
-        <div className="p-4 bg-gray-700 text-white  shadow-lg">
+        <div className={`p-4 ${darkMode ? "bg-gray-700 text-white" : "bg-white text-black"} shadow-lg`}>
             <h2 className="text-lg font-semibold">Conversation Rating</h2>
 
             {/* ⭐ Star Rating Display */}
@@ -32,7 +33,7 @@ const ChatFeedback = () => {
             </div>
 
             {/* Feedback Comment (Read-Only) */}
-            <p className="w-full p-2 bg-gray-600 rounded mt-2 text-white">
+            <p className={`w-full p-2 ${darkMode ? "bg-gray-600 text-white" : "bg-gray-200 text-black"} rounded mt-2`}>
                 {commentText}
             </p>
         </div>

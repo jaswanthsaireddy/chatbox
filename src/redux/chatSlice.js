@@ -8,6 +8,7 @@ const chatSlice = createSlice({
     showFeedbackForm: false,
     finalFeedback: null, 
     selectedConversation: null,
+    darkMode: true, // Initial state for dark mode
   },
   reducers: {
     setAIResponse: (state, action) => {
@@ -21,7 +22,6 @@ const chatSlice = createSlice({
     },
     toggleFeedbackForm: (state, action) => {
       state.showFeedbackForm = action.payload;
-
     },
     setFinalFeedback: (state, action) => {
       state.finalFeedback = action.payload;
@@ -44,7 +44,10 @@ const chatSlice = createSlice({
       state.conversations = [...action.payload.messages]; 
       state.selectedConversation = action.payload;
     },
-      },
+    toggleDarkMode: (state) => {
+      state.darkMode = !state.darkMode;
+    },
+  },
 });
 
 export const {
@@ -54,6 +57,7 @@ export const {
   setFinalFeedback,
   storeConversation,
   clearConversation,
-  loadPastConversation
+  loadPastConversation,
+  toggleDarkMode,
 } = chatSlice.actions;
 export default chatSlice.reducer;

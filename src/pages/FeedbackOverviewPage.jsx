@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const FeedbackOverview = () => {
     const pastConversations = useSelector((state) => state.chat.pastConversations);
+    const darkMode = useSelector((state) => state.chat.darkMode); // Get dark mode state from Redux
 
     // Navigation back to chat page
     const navigate = useNavigate();
@@ -23,8 +24,7 @@ const FeedbackOverview = () => {
         .sort((a, b) => sortOrder === "asc" ? a.rating - b.rating : b.rating - a.rating); // Apply sorting
 
     return (
-        <div className="p-6 bg-gray-800 text-white min-h-screen">
-
+        <div className={`p-6 min-h-screen ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
             <button 
                 className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                 onClick={() => navigate('/')} // Navigation back to chat page
@@ -37,7 +37,7 @@ const FeedbackOverview = () => {
             <div className="flex space-x-4 mb-4">
                 {/* Sort Dropdown */}
                 <select 
-                    className="p-2 bg-gray-700 rounded"
+                    className={`p-2 ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-300 text-black'} rounded`}
                     value={sortOrder}
                     onChange={(e) => setSortOrder(e.target.value)}
                 >
@@ -47,7 +47,7 @@ const FeedbackOverview = () => {
 
                 {/* Filter Dropdown */}
                 <select 
-                    className="p-2 bg-gray-700 rounded"
+                    className={`p-2 ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-300 text-black'} rounded`}
                     value={filterRating}
                     onChange={(e) => setFilterRating(e.target.value)}
                 >
@@ -61,9 +61,9 @@ const FeedbackOverview = () => {
             </div>
 
             {/* Feedback Table */}
-            <table className="w-full bg-gray-700 rounded-lg overflow-hidden">
+            <table className={`w-full ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-200 text-black'} rounded-lg overflow-hidden`}>
                 <thead>
-                    <tr className="bg-gray-900 text-left">
+                    <tr className={`${darkMode ? 'bg-gray-900' : 'bg-gray-300'} text-left`}>
                         <th className="p-3">Conversation ID</th>
                         <th className="p-3">Rating</th>
                         <th className="p-3">Comment</th>
@@ -76,7 +76,7 @@ const FeedbackOverview = () => {
                         </tr>
                     ) : (
                         feedbackData.map(({ id, rating, comment }) => (
-                            <tr key={id} className="border-t border-gray-600 hover:bg-gray-600">
+                            <tr key={id} className={`border-t ${darkMode ? 'border-gray-600 hover:bg-gray-600' : 'border-gray-400 hover:bg-gray-400'}`}>
                                 <td className="p-3">Conversation {id + 1}</td>
                                 <td className="p-3 text-yellow-400">⭐ {rating}</td>
                                 <td className="p-3">{comment}</td>

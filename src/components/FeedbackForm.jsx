@@ -1,15 +1,14 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setFinalFeedback, toggleFeedbackForm, storeConversation } from "../redux/chatSlice";
 import { useState } from "react";
 
 const FeedbackForm = () => {
   const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.chat.darkMode); // Get dark mode state from Redux
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [comment, setComment] = useState("");
 
-  
- 
   const handleSubmit = () => {
     if (rating > 0) {
       dispatch(setFinalFeedback({ rating, comment }));
@@ -20,7 +19,7 @@ const FeedbackForm = () => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="p-4 bg-gray-700 text-white rounded-lg shadow-lg">
+      <div className={`p-4 ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-200 text-black'} rounded-lg shadow-lg`}>
         <h2 className="text-lg font-semibold">Rate this conversation</h2>
 
         {/* ⭐ Star Rating with Hover Effect */}
@@ -41,7 +40,7 @@ const FeedbackForm = () => {
 
         {/* Feedback Text */}
         <textarea
-          className="w-full p-2 bg-gray-600 rounded mt-2"
+          className={`w-full p-2 ${darkMode ? 'bg-gray-600 text-white' : 'bg-gray-300 text-black'} rounded mt-2`}
           placeholder="Write your feedback..."
           value={comment}
           onChange={(e) => setComment(e.target.value)}
