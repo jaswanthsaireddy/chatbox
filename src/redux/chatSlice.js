@@ -6,34 +6,34 @@ const chatSlice = createSlice({
     conversations: [],
     pastConversations: [],
     showFeedbackForm: false,
-    finalFeedback: null, 
+    conversationFeedback: null, 
     selectedConversation: null,
-    darkMode: true, // Initial state for dark mode
+    darkMode: true 
   },
   reducers: {
     setAIResponse: (state, action) => {
       state.conversations.push(action.payload);
     },
-    setFeedback: (state, action) => {
-      const { index, feedback } = action.payload;
+    setMessageFeedback: (state, action) => { 
+      const { index, messageFeedback } = action.payload;
       if (state.conversations[index]) {
-        state.conversations[index].feedback = feedback;
+        state.conversations[index].messageFeedback = messageFeedback; 
       }
     },
     toggleFeedbackForm: (state, action) => {
       state.showFeedbackForm = action.payload;
     },
-    setFinalFeedback: (state, action) => {
-      state.finalFeedback = action.payload;
+    setConversationFeedback: (state, action) => { 
+      state.conversationFeedback = action.payload;
     },
     storeConversation: (state) => {
       if (state.conversations.length > 0) {
         state.pastConversations.push({
           messages: [...state.conversations], 
-          feedback: state.finalFeedback || {}, 
+          conversationFeedback: state.conversationFeedback || {}, 
         });
         state.conversations = []; 
-        state.finalFeedback = null; 
+        state.conversationFeedback = null; 
       }
     },
     clearConversation: (state) => {
@@ -52,9 +52,9 @@ const chatSlice = createSlice({
 
 export const {
   setAIResponse,
-  setFeedback,
+  setMessageFeedback, 
   toggleFeedbackForm,
-  setFinalFeedback,
+  setConversationFeedback, 
   storeConversation,
   clearConversation,
   loadPastConversation,

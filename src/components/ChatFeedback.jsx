@@ -6,10 +6,10 @@ const ChatFeedback = () => {
     const darkMode = useSelector((state) => state.chat.darkMode);
 
     // Ensure feedback exists to avoid errors
-    const feedback = selectedConversation?.feedback || { rating: 0, comment: "No feedback provided." };
+    const conversationFeedback = selectedConversation?.conversationFeedback || { rating: 0, comment: "No feedback provided." };
 
     // Check if the comment is null or empty
-    const commentText = feedback.comment?.trim() ? feedback.comment : "No comment";
+    const commentText = conversationFeedback.comment?.trim() ? conversationFeedback.comment : "No comment";
 
     // If no conversation is selected, return nothing
     if (!selectedConversation) return null;  
@@ -24,7 +24,7 @@ const ChatFeedback = () => {
                     <span
                         key={star}
                         className={`p-1 text-2xl ${
-                            star <= feedback.rating ? "text-yellow-400" : "text-gray-400"
+                            star <= conversationFeedback.rating ? "text-yellow-400" : "text-gray-400"
                         }`}
                     >
                         ★

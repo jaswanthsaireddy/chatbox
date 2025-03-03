@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setFinalFeedback, toggleFeedbackForm, storeConversation } from "../redux/chatSlice";
+import { setConversationFeedback, toggleFeedbackForm, storeConversation } from "../redux/chatSlice"; // Updated import
 import { useState } from "react";
 
 const FeedbackForm = () => {
@@ -11,7 +11,7 @@ const FeedbackForm = () => {
 
   const handleSubmit = () => {
     if (rating > 0) {
-      dispatch(setFinalFeedback({ rating, comment }));
+      dispatch(setConversationFeedback({ rating, comment })); // Updated action name
       dispatch(storeConversation()); 
       dispatch(toggleFeedbackForm(false));
     }

@@ -17,8 +17,8 @@ const FeedbackOverview = () => {
     const feedbackData = pastConversations
         .map((conversation, index) => ({
             id: index, // Using index as the ID
-            rating: conversation.feedback?.rating || 0, 
-            comment: conversation.feedback?.comment?.trim() || "No comment"
+            rating: conversation.conversationFeedback?.rating || 0, // Updated to conversationFeedback
+            comment: conversation.conversationFeedback?.comment?.trim() || "No comment" // Updated to conversationFeedback
         }))
         .filter(item => filterRating === "all" || item.rating === Number(filterRating)) // Apply filter
         .sort((a, b) => sortOrder === "asc" ? a.rating - b.rating : b.rating - a.rating); // Apply sorting

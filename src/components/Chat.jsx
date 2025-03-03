@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAIResponse, setFeedback, toggleFeedbackForm, clearConversation } from "../redux/chatSlice";
+import { setAIResponse, setMessageFeedback, toggleFeedbackForm, clearConversation } from "../redux/chatSlice";
 import FeedbackForm from "./FeedbackForm";
 
 const Chat = () => {
@@ -59,12 +59,12 @@ const Chat = () => {
       const userMessage = message;
       setMessage("");
 
-      dispatch(setAIResponse({ userMessage, aiMessage: getRandomMessage(), feedback: null }));
+      dispatch(setAIResponse({ userMessage, aiMessage: getRandomMessage(), messageFeedback: null }));
     }
   };
 
   const handleFeedback = (index, feedbackType) => {
-    dispatch(setFeedback({ index, feedback: feedbackType }));
+    dispatch(setMessageFeedback({ index, messageFeedback: feedbackType }));
   };
 
   const handleEndConversation = () => {
@@ -89,7 +89,7 @@ const Chat = () => {
                 <p className={`text-right ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>User:<br/> {chat.userMessage}</p>
                 <p className={`text-green-400 ${darkMode ? '' : 'text-green-600'}`}>AI:<br/> {chat.aiMessage}</p>
                 {hoverIndex === index && (
-                  <div className="absolute flex space-x-2 bg-gray-800 p-1 rounded">
+                  <div className={`absolute flex space-x-2 ${darkMode ? 'bg-gray-900' : 'bg-gray-400'} p-1 rounded`}>
                     <button 
                       onClick={() => !isPastConversation && handleFeedback(index, "thumbs-up")}
                       disabled={isPastConversation}
@@ -106,9 +106,9 @@ const Chat = () => {
                     </button>
                   </div>
                 )}
-                {chat.feedback && (
+                {chat.messageFeedback && (
                   <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Feedback: {chat.feedback === "thumbs-up" ? "👍 Liked" : "👎 Disliked"}
+                    Status: {chat.messageFeedback === "thumbs-up" ? "👍 Liked" : "👎 Disliked"}
                   </p>
                 )}
               </div>
