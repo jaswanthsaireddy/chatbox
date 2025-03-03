@@ -72,7 +72,8 @@ const getRandomMessage = () => {
   };
 
   const handleEndConversation = () => {
-    dispatch(toggleFeedbackForm(true)); 
+    dispatch(toggleFeedbackForm(true));
+    setMessage("") // If user enter a text in input and clicks on end conversation (to clear the input)
   };
 
   return (
