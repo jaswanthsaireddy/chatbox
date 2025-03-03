@@ -29,7 +29,7 @@ const chatSlice = createSlice({
     storeConversation: (state) => {
       if (state.conversations.length > 0) {
         state.pastConversations.push({
-          messages: [...state.conversations], 
+          savedConversations: [...state.conversations], 
           conversationFeedback: state.conversationFeedback || {}, 
         });
         state.conversations = []; 
@@ -41,7 +41,7 @@ const chatSlice = createSlice({
       state.selectedConversation = null;
     },
     loadPastConversation: (state, action) => {
-      state.conversations = [...action.payload.messages]; 
+      state.conversations = [...action.payload.savedConversations]; 
       state.selectedConversation = action.payload;
     },
     toggleDarkMode: (state) => {

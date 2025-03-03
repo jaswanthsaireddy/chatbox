@@ -9,7 +9,7 @@ const Chat = () => {
   const conversations = useSelector((state) => state.chat.conversations);
   const selectedConversation = useSelector((state) => state.chat.selectedConversation);
   const showFeedbackForm = useSelector((state) => state.chat.showFeedbackForm);
-  const darkMode = useSelector((state) => state.chat.darkMode); // Get dark mode state from Redux
+  const darkMode = useSelector((state) => state.chat.darkMode); 
   const [hoverIndex, setHoverIndex] = useState(null);
 
   const displayedConversation = Array.isArray(selectedConversation) ? selectedConversation : conversations;
