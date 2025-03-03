@@ -35,7 +35,7 @@ const Sidebar = () => {
         </button>
         <div className="space-y-2">
           {pastConversations.length === 0 ? (
-            <p className="text-gray-400">No past conversations</p>
+            <p className={`${darkMode ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'}`}>No past conversations</p>
           ) : (
             pastConversations.map((conversation, index) => (
               <div 
