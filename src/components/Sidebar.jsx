@@ -20,7 +20,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className={"w-1/4 bg-gray-800 p-4 text-white overflow-y-auto fixed md:static top-0 left-0 h-full md:h-auto"}>
+      <div className={"w-1/4 bg-gray-800 p-4 text-white overflow-y-auto fixed md:static top-0 left-0 h-full md:h-auto flex flex-col h-full"}>
         <h2 className="text-lg font-bold mb-4">Past Conversations</h2>
         <div className="space-y-2">
           {pastConversations.length === 0 ? (
@@ -55,7 +55,15 @@ const Sidebar = () => {
             ))
           )}
         </div>
-        <div className="absolute bottom-0 w-max p-4 bg-gray-800">
+        {/* <div className="sticky bottom-0 w-max p-4 bg-gray-800">
+          <button 
+            className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            onClick={() => navigate('/feedback-overview')}
+          >
+            Go to Feedback Overview
+          </button>
+        </div> */}
+        <div className="w-full p-4 bg-gray-800 mt-auto flex">
           <button 
             className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
             onClick={() => navigate('/feedback-overview')}
@@ -63,6 +71,7 @@ const Sidebar = () => {
             Go to Feedback Overview
           </button>
         </div>
+
       </div>
     </>
   );

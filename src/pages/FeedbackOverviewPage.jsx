@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const FeedbackOverview = () => {
     const pastConversations = useSelector((state) => state.chat.pastConversations);
+
+    // Navigation back to chat page
+    const navigate = useNavigate();
     
     // State for sorting and filtering
     const [sortOrder, setSortOrder] = useState("desc"); // Default: highest rating first
@@ -20,6 +24,13 @@ const FeedbackOverview = () => {
 
     return (
         <div className="p-6 bg-gray-800 text-white min-h-screen">
+
+            <button 
+                className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                onClick={() => navigate('/')} // Navigation back to chat page
+            >
+                Back to Chat
+            </button>
             <h2 className="text-2xl font-bold mb-4">Feedback Overview</h2>
 
             {/* Sorting & Filtering Controls */}
