@@ -10,7 +10,6 @@ const Sidebar = () => {
   const navigate = useNavigate(); // Initialize useNavigate hook
 
   const [hoveredIndex, setHoveredIndex] = useState(null); // Track hovered conversation
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false); // Track sidebar visibility
 
   // Function to generate shareable link
   const handleShare = (conversationId) => {
@@ -21,19 +20,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <button 
-        className="md:hidden flex p-2 bg-gray-800 text-white" 
-        onClick={() => setIsSidebarVisible(!isSidebarVisible)}
-      >
-        ☰
-      </button>
-      <div className={`w-1/4 bg-gray-800 p-4 text-white overflow-y-auto fixed md:static top-0 left-0 h-full md:h-auto transition-transform transform ${isSidebarVisible ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
-        {/* <button 
-          className="md:hidden p-2 bg-gray-800 text-white mb-4" 
-          onClick={() => setIsSidebarVisible(false)}
-        >
-          ← 
-        </button> */}
+      <div className={"w-1/4 bg-gray-800 p-4 text-white overflow-y-auto fixed md:static top-0 left-0 h-full md:h-auto"}>
         <h2 className="text-lg font-bold mb-4">Past Conversations</h2>
         <div className="space-y-2">
           {pastConversations.length === 0 ? (

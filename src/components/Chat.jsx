@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAIResponse, setFeedback, toggleFeedbackForm, storeConversation, loadPastConversation, clearConversation } from "../redux/chatSlice";
-import axios from "axios";
 import FeedbackForm from "./FeedbackForm";
 
 
@@ -131,7 +130,7 @@ const getRandomMessage = () => {
 
           {isPastConversation ? (
             <button
-              className="mt-4 w-full p-2 bg-green-500 text-white rounded hover:bg-gray-600"
+              className="mt-4 w-full p-2 bg-green-500 text-white rounded hover:bg-green-700"
               onClick={handleNewConversation} 
             >
               New Conversation

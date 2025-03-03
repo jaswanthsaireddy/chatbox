@@ -10,10 +10,11 @@ const ChatFeedback = () => {
     // Check if the comment is null or empty
     const commentText = feedback.comment?.trim() ? feedback.comment : "No comment";
 
-    if (!selectedConversation) return null; // If no conversation is selected, return nothing
+    // If no conversation is selected, return nothing
+    if (!selectedConversation) return null;  
 
     return (
-        <div className="p-4 bg-gray-700 text-white rounded-lg shadow-lg">
+        <div className="p-4 bg-gray-700 text-white  shadow-lg">
             <h2 className="text-lg font-semibold">Conversation Rating</h2>
 
             {/* ⭐ Star Rating Display */}
