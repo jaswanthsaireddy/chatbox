@@ -118,7 +118,7 @@ const Chat = () => {
           <div className="flex mt-4">
             <input
               type="text"
-              className={`flex-1 p-2 ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-300 text-black'} rounded-l-md`}
+              className={`flex-1 p-2 ${darkMode ? 'bg-gray-700 text-white placeholder-white' : 'bg-gray-300 text-black placeholder-black'} rounded-l-md`}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               onKeyDown={(e) => {
