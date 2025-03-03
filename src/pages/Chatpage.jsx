@@ -14,9 +14,9 @@ function Chatpage() {
 
   return (
     <div className={`flex h-screen ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
-      <Sidebar darkMode={darkMode} onToggleDarkMode={handleToggleDarkMode} />
-      <Chat darkMode={darkMode} />
-      <ChatFeedback darkMode={darkMode} />
+      <Sidebar />
+      <Chat  />
+      <ChatFeedback />
     </div>
   );
 }

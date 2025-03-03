@@ -12,26 +12,22 @@ This is a chatbox application built with React and Vite. It provides real-time m
 
 ## Technical choices and reasoning.
 
-I chose React with Vite for its fast development experience and optimized build performance, along with Tailwind CSS for efficient styling using utility classes. Express.js powers the backend, providing a lightweight and flexible API structure to handle chat interactions. Redux manages state efficiently, ensuring smooth handling of conversations and feedback.
+React with Vite for its fast development experience and optimized build performance, along with Tailwind CSS for efficient styling using utility classes. Redux manages state efficiently, ensuring smooth handling of conversations and feedback. Just mock data of AI responses not backend used.
 
 
 ## Design decisions and justifications
-Component based structure
-```
-APP
-    Sidebar
-    Chat
-        FeedbackForm
-```
-
-I have taken a single page in which sidebar and chat will render in app and , we can start having conversation with mockAPI and even give the feedback to inidividual message, All the conversations are stored using redux and once user finishes the conversation he can end the converstion ,then a submit feedback form will be displayed upon displaying the conversation will store nuumnerically like "Conversation 1"  and upon clicking the conversation  it will show the messasges exchange between ai response and user ,then upon cliking new conversation ,user can again start a conversation with AI.
+Component based Structure with two pages, "/" directing to main Chatpage and "/feedback-overview" page redirecting to feedback page overview page , Rendering Chat.jsx,ChatFeedback.jsx,Sidebar.jsx, In Chat.jsx the conversation happens between user and AI ,once conversation is ended, It will  displayed in the sideBar ,upon clicking the conversation in sidebar ,the history of text will be shown in read mode only and upon clicking the feedback overview button in the bottom of the sidebar we will be redirected to feedBack overview page in which all the past conversations feedback will be shown
 
 
 ## Trade-offs made, features left out, and potential improvements.
 
-yet to be done features are 
+# Trade-offs made
+Didnt use any backend.
+Not used any API for fetching/saving the data
 
-toggle between light and dark theme
+# Features Left out
+Italics and bold
+Failure left out
 
 
 ## Getting Started
