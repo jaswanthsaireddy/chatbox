@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAIResponse, setMessageFeedback, toggleFeedbackForm, clearConversation } from "../redux/chatSlice";
+import { setAIResponse, setMessageFeedback, toggleFeedbackForm, clearConversation, toggleDarkMode, toggleSidebar } from "../redux/chatSlice";
 import FeedbackForm from "./FeedbackForm";
 import { messages } from "../utils/constants";
+import { FaSun, FaMoon } from "react-icons/fa"; // Import icons
+import { GiHamburgerMenu } from "react-icons/gi";
+
 
 const Chat = () => {
   const [message, setMessage] = useState("");
@@ -11,6 +14,8 @@ const Chat = () => {
   const selectedConversation = useSelector((state) => state.chat.selectedConversation);
   const showFeedbackForm = useSelector((state) => state.chat.showFeedbackForm);
   const darkMode = useSelector((state) => state.chat.darkMode); 
+  const showSidebar = useSelector((state) => state.chat.showSidebar);
+
   const [hoverIndex, setHoverIndex] = useState(null);
 
   const displayedConversation = selectedConversation ? selectedConversation.savedConversations : conversations;
@@ -20,7 +25,13 @@ const Chat = () => {
     dispatch(clearConversation()); // Reset chat when starting a new conversation
   };
 
+  const handleToggleDarkMode = () => {
+    dispatch(toggleDarkMode());
+  };
 
+  const handleToggleSidebar = () => {
+    dispatch(toggleSidebar());
+  };
 
   // Function to fetch a random message
   const getRandomMessage = () => {
@@ -49,8 +60,23 @@ const Chat = () => {
   return (
     <div className={`flex h-screen w-full ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
       {/* Chatbox */}
-      <div className="flex-1 flex flex-col items-center p-4">
-        <h1 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-black'}`}>AI Chat Assistant</h1>
+      <div className="flex-1 items-center p-4">
+        <div className="flex justify-between w-full mb-4">
+          <button 
+            className={`p-2 rounded ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-300 text-black'}`}
+            onClick={handleToggleSidebar}
+          >
+            <GiHamburgerMenu />
+          </button>
+          <h1 className={`text-2xl self-center font-bold ${darkMode ? 'text-white' : 'text-black'}`}>AI Chat Assistant</h1>
+          <button
+            className={`p-2 rounded ${darkMode ? 'bg-yellow-500 text-black' : 'bg-gray-800 text-white'}`}
+            onClick={handleToggleDarkMode}
+          >
+            {darkMode ? <FaSun /> : <FaMoon />} {/* Add icons */}
+            
+          </button>
+        </div>
         <div className={`w-full ${darkMode ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'} rounded-lg shadow-lg p-4`}>
           <div className={`h-[28rem] overflow-y-auto p-2 ${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-md`}>
             {displayedConversation.map((chat, index) => (

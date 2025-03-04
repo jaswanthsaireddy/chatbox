@@ -24,7 +24,7 @@ const Sidebar = () => {
   };
 
   const getTrimmedMessage = (message) => {
-    const maxLength = 12;
+    const maxLength = 15;
     return message.length > maxLength ? `${message.substring(0, maxLength)}...` : message;
   };
 
@@ -38,12 +38,6 @@ const Sidebar = () => {
           >
             Go to Feedback Overview
           </button>
-        <button
-          className={`mb-4 p-2 rounded ${darkMode ? 'bg-yellow-500 text-black' : 'bg-gray-800 text-white'}`}
-          onClick={handleToggleDarkMode}
-        >
-          Toggle {darkMode ? 'Light' : 'Dark'} Mode
-        </button>
         <h2 className="text-lg font-bold mb-4">Past Conversations</h2>
         <div className="space-y-2">
           {pastConversations.length === 0 ? (

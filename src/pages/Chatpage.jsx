@@ -1,15 +1,16 @@
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import Chat from "../components/Chat";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/SideBar";
 import ChatFeedback from "../components/ChatFeedback";
 
 function Chatpage() {
-  
-  const darkMode = useSelector((state) => state.chat.darkMode); // Get dark mode state from Redux
+  const darkMode = useSelector((state) => state.chat.darkMode);
+  const showSidebar = useSelector((state) => state.chat.showSidebar);
+
   return (
     <div className={`flex h-screen ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
-      <Sidebar />
-      <Chat  />
+      {showSidebar && <Sidebar />}
+      <Chat />
       <ChatFeedback />
     </div>
   );

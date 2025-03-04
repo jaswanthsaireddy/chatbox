@@ -9,6 +9,7 @@ const chatSlice = createSlice({
     conversationFeedback: null, 
     selectedConversation: null,
     darkMode: true,
+    showSidebar: true,
   },
   reducers: {
     setAIResponse: (state, action) => {
@@ -47,6 +48,9 @@ const chatSlice = createSlice({
     toggleDarkMode: (state) => {
       state.darkMode = !state.darkMode;
     },
+    toggleSidebar: (state) => {
+      state.showSidebar = !state.showSidebar;
+    }
   },
 });
 
@@ -59,5 +63,6 @@ export const {
   clearConversation,
   loadPastConversation,
   toggleDarkMode,
+  toggleSidebar,
 } = chatSlice.actions;
 export default chatSlice.reducer;
