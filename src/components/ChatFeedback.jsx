@@ -8,7 +8,7 @@ const ChatFeedback = () => {
     // Ensure feedback exists to avoid errors
     const conversationFeedbackData = selectedConversation?.conversationFeedback || { rating: 0, comment: "No feedback provided." };
 
-    // Check if the comment is null or empty
+    // Check if the comment is null or empty, because we are allowing user to submit even without comments , so covers the case of star rating given and commnet not given
     const commentText = conversationFeedbackData.comment?.trim() ? conversationFeedbackData.comment : "No comment";
 
     // If no conversation is selected, return nothing

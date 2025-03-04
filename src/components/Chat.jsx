@@ -86,8 +86,8 @@ const Chat = () => {
                 onMouseEnter={() => setHoverIndex(index)}
                 onMouseLeave={() => setHoverIndex(null)}
               >
-                <p className={`text-right ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>User:<br/> {chat.userMessage}</p>
-                <p className={`text-green-400 ${darkMode ? '' : 'text-green-600'}`}>AI:<br/> {chat.aiMessage}</p>
+                <p className={`text-right mx-2 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>User:<br/> {chat.userMessage}</p>
+                <p className={`text-green-400 mx-2 ${darkMode ? '' : 'text-green-600'}`}>AI:<br/> {chat.aiMessage}</p>
                 {hoverIndex === index && (
                   <div className={`absolute flex space-x-2 ${darkMode ? 'bg-gray-900' : 'bg-gray-400'} p-1 rounded`}>
                     <button 
