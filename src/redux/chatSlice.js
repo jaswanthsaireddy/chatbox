@@ -6,9 +6,9 @@ const chatSlice = createSlice({
     conversations: [],
     pastConversations: [],
     showFeedbackForm: false,
-    conversationFeedback: null, 
-    selectedConversation: null,
-    darkMode: true 
+    conversationFeedback: {}, 
+    selectedConversation: {},
+    darkMode: true,
   },
   reducers: {
     setAIResponse: (state, action) => {
