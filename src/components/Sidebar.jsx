@@ -58,7 +58,7 @@ const Sidebar = () => {
                 >
                   Conversation {index + 1}
                   {hoveredIndex === index && (
-                    <button 
+                    <span 
                       className="ml-2 text-sm text-gray-300 bg-gray-600 px-2 py-1 rounded hover:bg-gray-500"
                       onClick={(e) => {
                         e.stopPropagation(); // Prevent selecting the conversation when clicking "Share"
@@ -66,7 +66,7 @@ const Sidebar = () => {
                       }}
                     >
                       Share
-                    </button>
+                    </span>
                   )}
                 </button>
               </div>
