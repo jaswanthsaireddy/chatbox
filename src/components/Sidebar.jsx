@@ -23,6 +23,11 @@ const Sidebar = () => {
     dispatch(toggleDarkMode());
   };
 
+  const getTrimmedMessage = (message) => {
+    const maxLength = 12;
+    return message.length > maxLength ? `${message.substring(0, maxLength)}...` : message;
+  };
+
   return (
     <>
       <div className={`w-1/4 ${darkMode ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'} p-4 overflow-y-auto fixed md:static top-0 left-0 h-full md:h-auto flex flex-col h-full`}>
@@ -56,7 +61,7 @@ const Sidebar = () => {
                     ${selectedConversation === conversation ? "bg-blue-500" : darkMode ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-300 hover:bg-gray-200"}`}
                   onClick={() => dispatch(loadPastConversation(conversation))} 
                 >
-                  Conversation {index + 1}
+                  {`Conv-${index + 1}: ${getTrimmedMessage(conversation.savedConversations[0].userMessage)}`}
                   {hoveredIndex === index && (
                     <span 
                       className="ml-2 text-sm text-gray-300 bg-gray-600 px-2 py-1 rounded hover:bg-gray-500"
