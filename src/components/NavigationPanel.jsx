@@ -30,8 +30,8 @@ const NavigationPanel = () => {
 
   return (
     <>
-      <div className={`w-1/4 ${darkMode ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'} p-4 overflow-y-auto fixed md:static top-0 left-0 h-full md:h-auto flex flex-col h-full`}>
-        <h2 className="text-lg font-bold mb-4">Navigation Panel</h2>
+      <div className={`w-1/4 ${darkMode ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'} p-4 overflow-y-auto fixed md:static top-0 left-0  md:h-auto flex flex-col h-full`}>
+        <h2 className="text-lg font-bold mb-4">Sidebar</h2>
           <button 
             className="mb-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
             onClick={() => navigate('/feedback-overview')}

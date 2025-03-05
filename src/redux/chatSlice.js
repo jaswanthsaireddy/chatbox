@@ -31,7 +31,7 @@ const chatSlice = createSlice({
       if (state.conversations.length > 0) {
         state.pastConversations.push({
           savedConversations: [...state.conversations], 
-          conversationFeedback: state.conversationFeedback || {}, 
+          conversationFeedback: state.conversationFeedback , 
         });
         state.conversations = []; 
         state.conversationFeedback = null; 

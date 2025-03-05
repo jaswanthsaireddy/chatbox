@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 const FeedbackOverview = () => {
     const pastConversations = useSelector((state) => state.chat.pastConversations);
     const darkMode = useSelector((state) => state.chat.darkMode); // Get dark mode state from Redux
-
-    // Navigation back to chat page
     const navigate = useNavigate();
     
     // State for sorting and filtering
