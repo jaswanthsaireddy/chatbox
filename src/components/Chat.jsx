@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAIResponse, setMessageFeedback, toggleFeedbackForm, clearConversation, toggleDarkMode, toggleSidebar } from "../redux/chatSlice";
 import FeedbackForm from "./FeedbackForm";
@@ -21,41 +21,41 @@ const Chat = () => {
   const displayedConversation = selectedConversation ? selectedConversation.savedConversations : conversations;
   const isPastConversation = selectedConversation !== null;
 
-  const handleNewConversation = () => {
+  const handleNewConversation = useCallback(() => {
     dispatch(clearConversation()); // Reset chat when starting a new conversation
-  };
+  }, [dispatch]);
 
-  const handleToggleDarkMode = () => {
+  const handleToggleDarkMode = useCallback(() => {
     dispatch(toggleDarkMode());
-  };
+  }, [dispatch]);
 
-  const handleToggleSidebar = () => {
+  const handleToggleSidebar = useCallback(() => {
     dispatch(toggleSidebar());
-  };
+  }, [dispatch]);
 
   // Function to fetch a random message
-  const getRandomMessage = () => {
+  const getRandomMessage = useCallback(() => {
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
     return randomMessage;
-  };
+  }, []);
 
-  const handleSend = async () => {
+  const handleSend = useCallback(async () => {
     if (message.trim() !== "") {
       const userMessage = message;
       setMessage("");
 
       dispatch(setAIResponse({ userMessage, aiMessage: getRandomMessage(), messageFeedback: null }));
     }
-  };
+  }, [message, dispatch, getRandomMessage]);
 
-  const handleFeedback = (index, feedbackType) => {
+  const handleFeedback = useCallback((index, feedbackType) => {
     dispatch(setMessageFeedback({ index, messageFeedback: feedbackType }));
-  };
+  }, [dispatch]);
 
-  const handleEndConversation = () => {
+  const handleEndConversation = useCallback(() => {
     dispatch(toggleFeedbackForm(true));
     setMessage(""); // If user enter a text in input and clicks on end conversation (to clear the input)
-  };
+  }, [dispatch]);
 
   return (
     <div className={`flex h-screen w-full ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
@@ -163,4 +163,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default React.memo(Chat);

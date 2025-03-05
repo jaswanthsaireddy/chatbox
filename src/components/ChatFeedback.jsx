@@ -40,4 +40,4 @@ const ChatFeedback = () => {
     );
 };
 
-export default ChatFeedback;
+export default React.memo(ChatFeedback);
