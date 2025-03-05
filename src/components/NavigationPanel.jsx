@@ -3,7 +3,7 @@ import { useState } from "react";
 import { loadPastConversation, toggleDarkMode } from "../redux/chatSlice"; 
 import { useNavigate } from "react-router-dom";
 
-const Sidebar = () => {
+const NavigationPanel = () => {
   const pastConversations = useSelector((state) => state.chat.pastConversations);
   const selectedConversation = useSelector((state) => state.chat.selectedConversation);
   const darkMode = useSelector((state) => state.chat.darkMode);
@@ -31,7 +31,7 @@ const Sidebar = () => {
   return (
     <>
       <div className={`w-1/4 ${darkMode ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'} p-4 overflow-y-auto fixed md:static top-0 left-0 h-full md:h-auto flex flex-col h-full`}>
-        <h2 className="text-lg font-bold mb-4">Sidebar</h2>
+        <h2 className="text-lg font-bold mb-4">Navigation Panel</h2>
           <button 
             className="mb-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
             onClick={() => navigate('/feedback-overview')}
@@ -78,4 +78,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default NavigationPanel;
