@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { loadPastConversation, toggleDarkMode, toggleSidebar } from "../redux/chatSlice"; // Updated import
 import { useNavigate } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi"; // Import hamburger icon
+import { GiHamburgerMenu } from "react-icons/gi"; 
 
 const NavigationPanel = () => {
   const pastConversations = useSelector((state) => state.chat.pastConversations);
@@ -37,7 +37,7 @@ const NavigationPanel = () => {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-bold">Sidebar</h2>
         <button 
-          className={`p-2 rounded ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-300 text-black'}`}
+          className={`p-2 rounded ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-300 text-black'} md:hidden`}
           onClick={handleToggleSidebar}
         >
           <GiHamburgerMenu />
