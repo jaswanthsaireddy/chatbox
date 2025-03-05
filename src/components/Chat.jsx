@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAIResponse, setMessageFeedback, toggleFeedbackForm, clearConversation, toggleDarkMode, toggleSidebar } from "../redux/chatSlice";
 import FeedbackForm from "./FeedbackForm";
 import { messages } from "../utils/constants";
-import { FaSun, FaMoon } from "react-icons/fa"; // Import icons
+import { FaSun, FaMoon } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-
+import ChatFeedback from "./ChatFeedback"; 
 
 const Chat = () => {
   const [message, setMessage] = useState("");
@@ -13,8 +13,7 @@ const Chat = () => {
   const conversations = useSelector((state) => state.chat.conversations);
   const selectedConversation = useSelector((state) => state.chat.selectedConversation);
   const showFeedbackForm = useSelector((state) => state.chat.showFeedbackForm);
-  const darkMode = useSelector((state) => state.chat.darkMode); 
-  const showSidebar = useSelector((state) => state.chat.showSidebar);
+  const darkMode = useSelector((state) => state.chat.darkMode);
 
   const [hoverIndex, setHoverIndex] = useState(null);
 
@@ -22,7 +21,7 @@ const Chat = () => {
   const isPastConversation = selectedConversation !== null;
 
   const handleNewConversation = () => {
-    dispatch(clearConversation()); // Reset chat when starting a new conversation
+    dispatch(clearConversation());
   };
 
   const handleToggleDarkMode = () => {
@@ -33,7 +32,6 @@ const Chat = () => {
     dispatch(toggleSidebar());
   };
 
-  // Function to fetch a random message
   const getRandomMessage = () => {
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
     return randomMessage;
@@ -54,12 +52,11 @@ const Chat = () => {
 
   const handleEndConversation = () => {
     dispatch(toggleFeedbackForm(true));
-    setMessage(""); // If user enter a text in input and clicks on end conversation (to clear the input)
+    setMessage("");
   };
 
   return (
-    <div className={`flex h-screen w-full ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
-      {/* Chatbox */}
+    <div className={`flex flex-col h-screen w-full ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
       <div className="flex-1 items-center p-4">
         <div className="flex justify-between w-full mb-4">
           <button 
@@ -73,8 +70,7 @@ const Chat = () => {
             className={`p-2 rounded ${darkMode ? 'bg-yellow-500 text-black' : 'bg-gray-800 text-white'}`}
             onClick={handleToggleDarkMode}
           >
-            {darkMode ? <FaSun /> : <FaMoon />} {/* Add icons */}
-            
+            {darkMode ? <FaSun /> : <FaMoon />}
           </button>
         </div>
         <div className={`w-full ${darkMode ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'} rounded-lg shadow-lg p-4`}>
@@ -114,7 +110,6 @@ const Chat = () => {
               </div>
             ))}
           </div>
-          {/* Input + Send Button */}
           <div className="flex mt-4">
             <input
               type="text"
@@ -139,12 +134,17 @@ const Chat = () => {
             </button>
           </div>
           {isPastConversation ? (
-            <button
-              className="mt-4 w-full p-2 bg-green-500 text-white rounded hover:bg-green-700"
-              onClick={handleNewConversation} 
-            >
-              New Conversation
-            </button>
+            <>
+              <button
+                className="mt-4 w-full p-2 bg-green-500 text-white rounded hover:bg-green-700 mb-8" 
+                onClick={handleNewConversation} 
+              >
+                New Conversation
+              </button>
+              <div className="md:hidden mb-8"> 
+                <ChatFeedback />
+              </div>
+            </>
           ) : (
             conversations.length > 0 && (
               <button
@@ -155,7 +155,6 @@ const Chat = () => {
               </button>
             )
           )}
-          {/* Feedback Form (Popup) */}
           {showFeedbackForm && <FeedbackForm />}
         </div>
       </div>

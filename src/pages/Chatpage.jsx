@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import Chat from "../components/Chat";
-import NavigationPanel from "../components/NavigationPanel"; // Updated import statement
+import NavigationPanel from "../components/NavigationPanel"; 
 import ChatFeedback from "../components/ChatFeedback";
 
 function Chatpage() {
@@ -11,7 +11,9 @@ function Chatpage() {
     <div className={`flex h-screen ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
       {showSidebar && <NavigationPanel />}
       <Chat />
-      <ChatFeedback />
+      <div className="hidden md:block"> 
+        <ChatFeedback />
+      </div>
     </div>
   );
 }

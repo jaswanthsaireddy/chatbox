@@ -1,17 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setConversationFeedback, toggleFeedbackForm, storeConversation } from "../redux/chatSlice"; // Updated import
+import { setConversationFeedback, toggleFeedbackForm, storeConversation } from "../redux/chatSlice"; 
 import { useState } from "react";
 
 const FeedbackForm = () => {
   const dispatch = useDispatch();
-  const darkMode = useSelector((state) => state.chat.darkMode); // Get dark mode state from Redux
+  const darkMode = useSelector((state) => state.chat.darkMode); 
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [comment, setComment] = useState("");
 
   const handleSubmit = () => {
     if (rating > 0) {
-      dispatch(setConversationFeedback({ rating, comment })); // Updated action name
+      dispatch(setConversationFeedback({ rating, comment })); 
       dispatch(storeConversation()); 
       dispatch(toggleFeedbackForm(false));
     }
