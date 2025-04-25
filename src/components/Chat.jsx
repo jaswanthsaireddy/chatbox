@@ -65,7 +65,7 @@ const Chat = () => {
           >
             <GiHamburgerMenu />
           </button>
-          <h1 className={`text-2xl self-center font-bold ${darkMode ? 'text-white' : 'text-black'}`}>AI Chat Assistant</h1>
+          <h1 className={`text-2xl self-center font-bold ${darkMode ? 'text-white' : 'text-black'}`}>AI Checking jenkins </h1>
           <button
             className={`p-2 rounded ${darkMode ? 'bg-yellow-500 text-black' : 'bg-gray-800 text-white'}`}
             onClick={handleToggleDarkMode}
