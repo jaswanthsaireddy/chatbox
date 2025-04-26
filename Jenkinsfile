@@ -6,11 +6,13 @@ pipeline {
     }
 
     stages {
+
         stage('Checkout') {
             steps {
-                git 'https://github.com/jaswanthsaireddy/chatbox'
+                git url: 'https://github.com/jaswanthsaireddy/chatbox.git', branch: 'master'
             }
         }
+    
 
         stage('Install Dependencies') {
             steps {
@@ -28,7 +30,7 @@ pipeline {
             steps {
                 sh 'git config user.name "jenkins"'
                 sh 'git config user.email "jenkins@localhost"'
-                sh 'npm set //github.com/:_authToken=$GH_TOKEN'
+                sh 'git remote set-url origin https://${GH_TOKEN}@github.com/jaswanthsaireddy/chatbox.git'
                 sh 'npm run deploy'
             }
         }
